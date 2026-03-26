@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Discovery Studio</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero-stage" id="hero">
+            <div class="hero-backdrop" id="hero-backdrop"></div>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-topbar">
+                <div class="brand-lockup">
+                    <span class="brand-mark">CINEPULSE</span>
+                    <span class="brand-note">Movie Discovery Studio</span>
+                </div>
+                <div class="topbar-copy">A cinematic red-room interface for exploring your next watch.</div>
+            </div>
+
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <p class="eyebrow">Featured Selection</p>
+                    <h1 id="movie-title"></h1>
+                    <div class="chip-row" id="detail-chips"></div>
+                    <p id="movie-overview" class="movie-overview"></p>
+
+                    <div class="hero-actions">
+                        <button id="refresh-button" class="primary-button" type="button">Refresh recommendations</button>
+
+                        <div class="slider-shell slider-shell--hero">
+                            <div class="slider-head">
+                                <label class="field-label" for="recommendation-count">Recommendation depth</label>
+                                <span id="recommendation-count-value">6</span>
+                            </div>
+                            <input id="recommendation-count" type="range" min="4" max="12" value="6">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-poster-shell">
+                    <div class="poster-frame poster-frame--hero">
+                        <img id="movie-poster" alt="Selected movie poster">
+                        <div id="poster-fallback" class="poster-fallback">Poster unavailable</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-stack">
+            <section class="feature-grid">
+                <article class="story-panel glass-panel">
+                    <div class="panel-header">
+                        <h2>Movie Dossier</h2>
+                    </div>
+
+                    <dl class="detail-list">
+                        <div>
+                            <dt>Genres</dt>
+                            <dd id="movie-genres"></dd>
+                        </div>
+                        <div>
+                            <dt>Director</dt>
+                            <dd id="movie-directors"></dd>
+                        </div>
+                        <div>
+                            <dt>Cast</dt>
+                            <dd id="movie-cast"></dd>
+                        </div>
+                        <div>
+                            <dt>Production</dt>
+                            <dd id="movie-production"></dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <aside class="control-panel glass-panel">
+                    <div class="panel-header">
+                        <h2>Discovery Console</h2>
+                    </div>
+
+                    <label class="field-label" for="movie-search">Search by title, director, or genre</label>
+                    <p class="control-hint">Type at least 2 letters, then click a search result or a recommendation card to load a new featured movie.</p>
+                    <div class="search-shell">
+                        <input id="movie-search" class="search-input" type="text" placeholder="Search a film universe..." autocomplete="off">
+                        <div class="search-results" id="search-results"></div>
+                    </div>
+
+                    <div class="selection-card">
+                        <p class="selection-label">Current title</p>
+                        <h3 id="selection-title"></h3>
+                        <p id="selection-subtitle" class="selection-subtitle"></p>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="recommendations-shell">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">More Like This</p>
+                        <h2 id="recommendation-title">More like this</h2>
+                    </div>
+                    <p id="recommendation-meta" class="recommendation-meta"></p>
+                </div>
+
+                <div id="recommendations-grid" class="recommendations-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.__INITIAL_STATE__ = {{ initial_state | safe }};
+    </script>
+    <script src="{{ url_for('static', path='app.js') }}" defer></script>
+</body>
+</html>
